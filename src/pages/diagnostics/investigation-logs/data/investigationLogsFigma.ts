@@ -12,7 +12,7 @@ export type InvestigationLogRow = {
   age: number;
   invName: string;
   invAmount: string;
-  trtType: TreatmentType;
+  staffName: string;
   clinician: string;
   hasResult: boolean;
 };
@@ -31,7 +31,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 25,
     invName: "MP",
     invAmount: "N 2,000.00",
-    trtType: "PRIVATE",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -47,7 +47,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 22,
     invName: "PCV",
     invAmount: "N 3,000.00",
-    trtType: "STAFF",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -63,7 +63,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 20,
     invName: "URINE MCS",
     invAmount: "N 2,000.00",
-    trtType: "HMO",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -79,7 +79,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 28,
     invName: "URINALYSIS",
     invAmount: "N 5,000.00",
-    trtType: "COMPANY",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -95,7 +95,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 29,
     invName: "MP",
     invAmount: "N 2,000.00",
-    trtType: "PRIVATE",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -111,7 +111,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 33,
     invName: "PCV",
     invAmount: "N 3,000.00",
-    trtType: "HMO",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -127,7 +127,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 31,
     invName: "URINE MCS",
     invAmount: "N 3,000.00",
-    trtType: "COMPANY",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -143,7 +143,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 27,
     invName: "URINALYSIS",
     invAmount: "N 4,000.00",
-    trtType: "STAFF",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },
@@ -159,7 +159,7 @@ export const INVESTIGATION_LOG_ROWS: InvestigationLogRow[] = [
     age: 36,
     invName: "MP",
     invAmount: "N 3,500.00",
-    trtType: "PRIVATE",
+    staffName: "Sample Tester",
     clinician: "Titilayo O.",
     hasResult: true,
   },

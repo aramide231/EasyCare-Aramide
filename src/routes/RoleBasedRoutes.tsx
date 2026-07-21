@@ -157,10 +157,7 @@ const RoleBasedRoutes = () => {
           path="make-request"
           element={<ComingSoonPage title="Make Request" />}
         />
-        <Route
-          path="set-reminder"
-          element={<ComingSoonPage title="Set Reminder" />}
-        />
+        <Route path="set-reminder" element={<ReminderPage />} />
         <Route path="reports/admission" element={<DoctorAdmissionReport />} />
         <Route path="reports/discharge" element={<DoctorDischargeReport />} />
         <Route path="doctor-logs" element={<DoctorLogsReport />} />

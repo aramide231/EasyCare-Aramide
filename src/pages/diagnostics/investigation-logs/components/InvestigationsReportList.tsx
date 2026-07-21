@@ -35,7 +35,8 @@ export default function InvestigationsReportList() {
       row.patientId.toLowerCase().includes(q) ||
       row.phoneNumber.toLowerCase().includes(q) ||
       row.invName.toLowerCase().includes(q) ||
-      row.clinician.toLowerCase().includes(q)
+      row.clinician.toLowerCase().includes(q) ||
+      row.staffName.toLowerCase().includes(q)
     );
   });
 
@@ -69,29 +70,29 @@ export default function InvestigationsReportList() {
   return (
     <>
       <div className="w-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <div className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-          <h1 className="shrink-0 text-xl font-bold text-gray-800">
-            Investigations Report
-          </h1>
-
-          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center xl:w-auto xl:justify-end">
+        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:items-center">
+            <h1 className="shrink-0 text-xl font-bold text-gray-800">
+              Investigations Report
+            </h1>
             <LogSearchBar
               placeholder="Search with recipient name, ID or phone number"
               value={searchTerm}
               onChange={setSearchTerm}
-              className="sm:max-w-md xl:min-w-[320px]"
+              className="max-w-md flex-1"
             />
-            <div className="flex shrink-0 items-center gap-3">
-              <DateRangeFilter
-                value={dateRange}
-                onChange={setDateRange}
-                align="right"
-              />
-              <ExportButton
-                reportTitle="Investigations Report"
-                tableRef={tableRef}
-              />
-            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-3">
+            <DateRangeFilter
+              value={dateRange}
+              onChange={setDateRange}
+              align="right"
+            />
+            <ExportButton
+              reportTitle="Investigations Report"
+              tableRef={tableRef}
+            />
           </div>
         </div>
 
@@ -120,7 +121,7 @@ export default function InvestigationsReportList() {
                   Inv. Amount
                 </th>
                 <th className="whitespace-nowrap px-4 py-2 font-medium">
-                  Trt. Type
+                  Staff Name
                 </th>
                 <th className="whitespace-nowrap px-4 py-2 font-medium">
                   Clinician
@@ -185,11 +186,7 @@ export default function InvestigationsReportList() {
                         {row.invAmount}
                       </td>
                       <td className="whitespace-nowrap px-4 py-3">
-                        <span
-                          className={`rounded-full px-3 py-1 text-xs font-medium ${treatmentTypeBadgeClass(row.trtType)}`}
-                        >
-                          {row.trtType}
-                        </span>
+                        {row.staffName}
                       </td>
                       <td className="whitespace-nowrap px-4 py-3">
                         {row.clinician}

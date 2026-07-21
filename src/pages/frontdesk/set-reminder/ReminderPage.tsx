@@ -15,57 +15,53 @@ const ReminderPage = () => {
   const [activeView, setActiveView] = useState("create-schedule");
 
   return (
-    <div className="flex h-screen w-full">
-      <main className="flex-1 p-6 ">
-        <Card className="my-10 border-2 rounded p-5 w-[80%] mx-auto">
-          <CardContent>
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-lg">Set Reminder</h3>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="bg-[#eeecfa] border-2 border-[#9080e0] text-[#9080e0] rounded-lg font-medium flex items-center gap-2">
-                    <Filter size={16} />
-                    {activeView === "create-schedule"
-                      ? "Create Schedule"
-                      : "View Reminders"}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuItem
-                    className={`cursor-pointer ${
-                      activeView === "create"
-                        ? "text-white bg-[#9080e0]"
-                        : "text-[#9080e0] bg-[#eeecfa] hover:bg-[#e0dafa]"
-                    }`}
-                    onClick={() => setActiveView("create-schedule")}
-                  >
-                    Create Schedule
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className={`cursor-pointer ${
-                      activeView === "view"
-                        ? "text-white bg-[#9080e0]"
-                        : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                    onClick={() => setActiveView("view")}
-                  >
-                    View Reminders
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            <hr className="mb-4" />
-            <div>
-              {activeView === "create-schedule" ? (
-                <SetReminder />
-              ) : (
-                <ViewReminder />
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </main>
-    </div>
+    <Card className="mx-auto my-4 w-full max-w-5xl rounded border-2 p-5">
+      <CardContent className="p-0">
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Set Reminder</h3>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="flex items-center gap-2 rounded-lg border-2 border-[#9080e0] bg-[#eeecfa] font-medium text-[#9080e0]">
+                <Filter size={16} />
+                {activeView === "create-schedule"
+                  ? "Create Schedule"
+                  : "View Reminders"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem
+                className={`cursor-pointer ${
+                  activeView === "create-schedule"
+                    ? "bg-[#eeecfa] text-[#9080e0] hover:bg-[#e0dafa]"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveView("create-schedule")}
+              >
+                Create Schedule
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className={`cursor-pointer ${
+                  activeView === "view"
+                    ? "bg-[#eeecfa] text-[#9080e0]"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveView("view")}
+              >
+                View Reminders
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <hr className="mb-4" />
+        <div>
+          {activeView === "create-schedule" ? (
+            <SetReminder />
+          ) : (
+            <ViewReminder />
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

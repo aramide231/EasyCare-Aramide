@@ -130,7 +130,6 @@ const ViewReminder = () => {
     }
   };
 
-  // Function to get visit type badge color
   const getPatientStatus = (type: "PENDING" | "TRIGGERED"): string => {
     switch (type) {
       case "PENDING":

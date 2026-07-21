@@ -21,7 +21,7 @@ const ROLE_OPTIONS: { value: UserRole; label: string }[] = [
   { value: "frontdesk", label: "Front Desk" },
   { value: "nurse", label: "Nurse" },
   { value: "doctor", label: "Doctor" },
-  { value: "diagnostics", label: "Diagnostics" },
+  { value: "diagnostics", label: "Laboratory" },
   { value: "admin", label: "Admin" },
 ];
 

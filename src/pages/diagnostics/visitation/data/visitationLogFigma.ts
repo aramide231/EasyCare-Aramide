@@ -16,7 +16,7 @@ export type VisitationLogRow = {
   clinician: string;
 };
 
-/** Visitation Logs — Diagnx Report List (9 rows, Figma). */
+/** Visitation Logs — Laboratory Report Logs (9 rows, Figma). */
 export const VISITATION_LOG_ROWS: VisitationLogRow[] = [
   {
     id: 1,

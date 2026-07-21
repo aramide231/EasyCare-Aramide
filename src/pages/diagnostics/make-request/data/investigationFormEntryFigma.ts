@@ -74,4 +74,6 @@ export const MAKE_REQUEST_PATIENT = {
 export const INVESTIGATION_FORM_DEFAULTS = {
   investigationType: "Laboratory",
   investigationName: "Malaria Parasite (MP)",
+  /** When the investigation was requested (from the originating test request). */
+  investigationRequestedAt: new Date("2026-07-16T08:35:00"),
 };

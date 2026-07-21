@@ -31,7 +31,7 @@ export default function DiagnosticsSidebar() {
     reports: true,
   });
 
-  const hospitalSubtitle = "DIAGNX (Lab) & RADIOLOGY (Scan & X-ray)";
+  const hospitalSubtitle = "Laboratory";
 
   const toggleMenu = (menuName: MenuSection) => {
     if (isCollapsed) return;

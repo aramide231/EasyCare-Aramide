@@ -1,29 +1,57 @@
 import { FaBell, FaHospitalUser, FaUserCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import DashboardSummaryCard from "@/pages/doctor/dashboard/components/DashboardSummaryCard";
+import {
+  NOTIFICATION_ROWS,
+  PATIENTS_LOG_ROWS,
+  type PatientCategory,
+} from "../../data/mockDiagnostics";
+
+type SummaryItem = {
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+  variant: "dark" | "notification";
+  path: string;
+  patientCategory?: PatientCategory;
+};
 
 export default function DiagnosticsDashboardSummary() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const displayName = user?.fullName ?? "John Doe";
 
-  const items = [
+  const outPatientCount = PATIENTS_LOG_ROWS.filter(
+    (row) => row.patientCategory === "OUT-PATIENT"
+  ).length;
+  const inPatientCount = PATIENTS_LOG_ROWS.filter(
+    (row) => row.patientCategory === "IN-PATIENT"
+  ).length;
+
+  const items: SummaryItem[] = [
     {
       title: "Out Patient",
-      subtitle: "50 new patients",
+      subtitle: `${outPatientCount} new patients`,
       icon: <FaUserCheck size={22} className="text-white" />,
-      variant: "dark" as const,
+      variant: "dark",
+      path: "/diagnostics",
+      patientCategory: "OUT-PATIENT",
     },
     {
       title: "In Patient",
-      subtitle: "15 patients",
+      subtitle: `${inPatientCount} patients`,
       icon: <FaHospitalUser size={22} className="text-white" />,
-      variant: "dark" as const,
+      variant: "dark",
+      path: "/diagnostics",
+      patientCategory: "IN-PATIENT",
     },
     {
       title: "Notifications",
-      subtitle: "10 messages",
+      subtitle: `${NOTIFICATION_ROWS.length} messages`,
       icon: <FaBell size={22} className="text-[#FA7401]" />,
-      variant: "notification" as const,
+      variant: "notification",
+      path: "/diagnostics/notifications",
     },
   ];
 
@@ -44,6 +72,13 @@ export default function DiagnosticsDashboardSummary() {
             subtitle={item.subtitle}
             icon={item.icon}
             variant={item.variant}
+            onClick={() =>
+              navigate(item.path, {
+                state: item.patientCategory
+                  ? { patientCategory: item.patientCategory }
+                  : undefined,
+              })
+            }
           />
         ))}
       </div>

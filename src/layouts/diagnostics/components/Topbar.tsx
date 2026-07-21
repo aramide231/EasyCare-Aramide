@@ -1,8 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { Search } from "lucide-react";
-import clientimage from "@/assets/image/haywhy.jpg";
-import { useAuth } from "@/context/AuthContext";
 import AppGridMenu from "@/components/header/AppGridMenu";
+import ProfileMenu from "@/components/header/ProfileMenu";
 import Clock from "@/layouts/nurse/components/Clock";
 
 const breadcrumbPatterns = [
@@ -32,7 +31,6 @@ const PERFORM_ACTION_BREADCRUMBS: Record<string, string> = {
 
 export default function DiagnosticsTopbar() {
   const location = useLocation();
-  const { user } = useAuth();
 
   const isBreadcrumbPage = breadcrumbPatterns.some((pattern) =>
     pattern.test(location.pathname)
@@ -139,21 +137,7 @@ export default function DiagnosticsTopbar() {
 
         <div className="flex shrink-0 items-center justify-end gap-5 justify-self-end">
           <AppGridMenu />
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full border border-gray-200">
-              <img
-                src={clientimage}
-                alt={user?.fullName ?? "User"}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="hidden min-w-0 text-left sm:block">
-              <p className="truncate text-sm font-semibold text-gray-900">
-                {user?.fullName}
-              </p>
-              <p className="text-xs text-gray-500">Diagnostics</p>
-            </div>
-          </div>
+          <ProfileMenu />
         </div>
       </div>
     </header>

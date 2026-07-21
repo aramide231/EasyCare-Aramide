@@ -9,19 +9,26 @@ const SelectCategoryCard = ({
   selected?: boolean;
   onClick?: () => void;
 }) => (
-  <div
-    className={`flex h-[4.25rem] w-full cursor-pointer flex-col items-center justify-center rounded-md border px-1 py-2 transition ${
-      selected
-        ? "border-[#573FD1] bg-purple-100 shadow-sm"
-        : "border-purple-100/80 bg-purple-50/80 hover:border-purple-200 hover:bg-purple-50"
-    }`}
+  <button
+    type="button"
     onClick={onClick}
+    className={`flex h-[90px] w-full min-w-0 cursor-pointer flex-col items-center justify-center rounded-[10px] border px-5 py-4 transition ${
+      selected
+        ? "border-[#573FD1] bg-[#573FD1] text-white"
+        : "border-transparent bg-[#EDE9FE] hover:bg-purple-100"
+    }`}
   >
-    <Icon className="h-4 w-4 shrink-0 text-[#573FD1]" />
-    <p className="mt-1.5 line-clamp-2 text-center text-[10px] font-medium leading-tight text-gray-700">
+    <Icon
+      className={`text-xl ${selected ? "text-white" : "text-[#573FD1]"}`}
+    />
+    <p
+      className={`mt-1 line-clamp-2 text-center text-[10px] font-medium leading-tight ${
+        selected ? "text-white" : "text-[#573FD1]"
+      }`}
+    >
       {label}
     </p>
-  </div>
+  </button>
 );
 
 export default SelectCategoryCard;

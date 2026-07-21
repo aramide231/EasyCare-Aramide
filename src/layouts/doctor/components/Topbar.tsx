@@ -1,8 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { Search } from "lucide-react";
-import clientimage from "@doctor-shared/assets/image/haywhy.jpg";
-import { useAuth } from "@doctor-shared/context/useAuth";
 import AppGridMenu from "@doctor-shared/components/AppGridMenu";
+import ProfileMenu from "@doctor-shared/components/ProfileMenu";
 import Clock from "@doctor-shared/components/layout/Clock";
 
 const DOCTOR_REPORT_PATHS = [
@@ -51,12 +50,6 @@ const breadcrumbPatterns = [
 
 const Topbar = () => {
   const location = useLocation();
-  const { user } = useAuth();
-
-  const roleLabel =
-    user?.userRole && user.userRole.length > 0
-      ? user.userRole.charAt(0).toUpperCase() + user.userRole.slice(1)
-      : "Doctor";
 
   const isBreadcrumbPage = breadcrumbPatterns.some((pattern) =>
     pattern.test(location.pathname)
@@ -226,21 +219,7 @@ const Topbar = () => {
 
         <div className="flex shrink-0 items-center justify-end gap-5 justify-self-end">
           <AppGridMenu />
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full border border-gray-200">
-              <img
-                src={clientimage}
-                alt={user?.fullName ?? "User"}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="hidden min-w-0 text-left sm:block">
-              <p className="truncate text-sm font-semibold text-gray-900">
-                {user?.fullName}
-              </p>
-              <p className="text-xs text-gray-500">{roleLabel}</p>
-            </div>
-          </div>
+          <ProfileMenu />
         </div>
       </div>
     </header>

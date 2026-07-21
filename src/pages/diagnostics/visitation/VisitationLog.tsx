@@ -1,7 +1,7 @@
-import DiagnxReportList from "./components/DiagnxReportList";
+import LaboratoryReportList from "./components/LaboratoryReportList";
 
 const VisitationLog = () => {
-  return <DiagnxReportList />;
+  return <LaboratoryReportList />;
 };
 
 export default VisitationLog;

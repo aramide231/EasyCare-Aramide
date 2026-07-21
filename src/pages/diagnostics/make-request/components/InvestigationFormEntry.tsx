@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { format } from "date-fns";
-import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
-import "react-datepicker/dist/react-datepicker.css";
-import calendartime from "@/assets/icon/calendar_clock.png";
+import { useAuth } from "@/context/AuthContext";
 import {
   formFieldGridClass,
   formFieldInputClass,
@@ -28,18 +26,16 @@ const EMPTY_MALARIA_ROWS: MalariaResultRow[] = MALARIA_PARASITE_ROWS.map(
 );
 
 export default function InvestigationFormEntry() {
+  const { user } = useAuth();
   const [specimenType, setSpecimenType] = useState("");
   const [parameterType, setParameterType] = useState("");
   const [malariaRows, setMalariaRows] =
     useState<MalariaResultRow[]>(EMPTY_MALARIA_ROWS);
   const [requestedBy, setRequestedBy] = useState("");
-  const [doneBy, setDoneBy] = useState("");
-  const [requestDateTime, setRequestDateTime] = useState<Date | null>(
-    new Date()
-  );
+  const [doneBy, setDoneBy] = useState(user?.fullName ?? "");
   const [resultDateTime, setResultDateTime] = useState<Date | null>(null);
-  const [requestPickerOpen, setRequestPickerOpen] = useState(false);
-  const [resultPickerOpen, setResultPickerOpen] = useState(false);
+
+  const requestDateTime = INVESTIGATION_FORM_DEFAULTS.investigationRequestedAt;
 
   const updateMalariaCell = (
     index: number,
@@ -51,7 +47,7 @@ export default function InvestigationFormEntry() {
     );
   };
 
-  const handleConfirm = () => {
+  const handleUpload = () => {
     if (!specimenType) {
       toast.error("Select a specimen type.");
       return;
@@ -60,7 +56,8 @@ export default function InvestigationFormEntry() {
       toast.error("Select a parameter type.");
       return;
     }
-    toast.success("Investigation request confirmed.");
+    setResultDateTime(new Date());
+    toast.success("Investigation results uploaded.");
   };
 
   const formatDateTimeLabel = (date: Date | null) =>
@@ -173,90 +170,29 @@ export default function InvestigationFormEntry() {
       </div>
 
       <div className={`${formFieldGridClass} mb-6`}>
-        <div className="relative">
+        <div>
           <label className="mb-1 block text-xs font-bold uppercase text-gray-700">
             Date | Time of Investigation Request
           </label>
-          <div className="relative">
-            <input
-              type="text"
-              readOnly
-              value={formatDateTimeLabel(requestDateTime)}
-              onClick={() => setRequestPickerOpen(true)}
-              className={`${formFieldInputClass} cursor-pointer pr-10`}
-              placeholder="dd-mm-yyyy / hh : mm A"
-            />
-            <button
-              type="button"
-              onClick={() => setRequestPickerOpen(true)}
-              className="absolute inset-y-0 right-3 flex items-center"
-              aria-label="Pick request date and time"
-            >
-              <img src={calendartime} alt="" className="h-5 w-5" />
-            </button>
-          </div>
-          {requestPickerOpen ? (
-            <div className="absolute z-50 mt-2 rounded-lg border bg-white p-4 shadow-lg">
-              <DatePicker
-                selected={requestDateTime}
-                onChange={(date) => setRequestDateTime(date)}
-                showTimeSelect
-                timeFormat="hh:mm aa"
-                dateFormat="dd-MM-yyyy / hh : mm aa"
-                inline
-              />
-              <button
-                type="button"
-                onClick={() => setRequestPickerOpen(false)}
-                className="mt-2 w-full rounded-lg bg-[#573FD1] py-2 text-sm text-white"
-              >
-                Done
-              </button>
-            </div>
-          ) : null}
+          <input
+            type="text"
+            readOnly
+            value={formatDateTimeLabel(requestDateTime)}
+            className={`${formFieldInputClass} bg-gray-100 text-gray-600`}
+          />
         </div>
 
-        <div className="relative">
+        <div>
           <label className="mb-1 block text-xs font-bold uppercase text-gray-700">
             Date | Time of Investigation Result
           </label>
-          <div className="relative">
-            <input
-              type="text"
-              readOnly
-              value={formatDateTimeLabel(resultDateTime)}
-              onClick={() => setResultPickerOpen(true)}
-              className={`${formFieldInputClass} cursor-pointer pr-10`}
-              placeholder="dd-mm-yyyy / hh : mm A"
-            />
-            <button
-              type="button"
-              onClick={() => setResultPickerOpen(true)}
-              className="absolute inset-y-0 right-3 flex items-center"
-              aria-label="Pick result date and time"
-            >
-              <img src={calendartime} alt="" className="h-5 w-5" />
-            </button>
-          </div>
-          {resultPickerOpen ? (
-            <div className="absolute z-50 mt-2 rounded-lg border bg-white p-4 shadow-lg">
-              <DatePicker
-                selected={resultDateTime}
-                onChange={(date) => setResultDateTime(date)}
-                showTimeSelect
-                timeFormat="hh:mm aa"
-                dateFormat="dd-MM-yyyy / hh : mm aa"
-                inline
-              />
-              <button
-                type="button"
-                onClick={() => setResultPickerOpen(false)}
-                className="mt-2 w-full rounded-lg bg-[#573FD1] py-2 text-sm text-white"
-              >
-                Done
-              </button>
-            </div>
-          ) : null}
+          <input
+            type="text"
+            readOnly
+            value={formatDateTimeLabel(resultDateTime)}
+            placeholder="Captured on upload"
+            className={`${formFieldInputClass} bg-gray-100 text-gray-600`}
+          />
         </div>
 
         <div>
@@ -274,7 +210,7 @@ export default function InvestigationFormEntry() {
 
         <div>
           <label className="mb-1 block text-xs font-bold uppercase text-gray-700">
-            Investigation Done By
+            Laboratory Scientist/Technician Name
           </label>
           <input
             type="text"
@@ -313,10 +249,10 @@ export default function InvestigationFormEntry() {
       <div className="flex justify-center">
         <button
           type="button"
-          onClick={handleConfirm}
+          onClick={handleUpload}
           className="min-w-[200px] rounded-lg bg-[#573FD1] px-8 py-3 text-sm font-semibold text-white hover:bg-[#4a35b8]"
         >
-          Confirm
+          Upload
         </button>
       </div>
     </div>

@@ -1,8 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { Search } from "lucide-react";
-import clientimage from "@/assets/image/haywhy.jpg";
-import { useAuth } from "@/context/AuthContext";
 import AppGridMenu from "@/components/header/AppGridMenu";
+import ProfileMenu from "@/components/header/ProfileMenu";
 import Clock from "./Clock";
 
 const breadcrumbPatterns = [
@@ -17,12 +16,6 @@ const breadcrumbPatterns = [
 
 const Topbar = () => {
   const location = useLocation();
-  const { user } = useAuth();
-
-  const roleLabel =
-    user?.userRole && user.userRole.length > 0
-      ? user.userRole.charAt(0).toUpperCase() + user.userRole.slice(1)
-      : "";
 
   const isBreadcrumbPage = breadcrumbPatterns.some((pattern) =>
     pattern.test(location.pathname),
@@ -108,21 +101,7 @@ const Topbar = () => {
         {/* Right — grid + profile */}
         <div className="flex shrink-0 items-center justify-end gap-5 justify-self-end">
           <AppGridMenu />
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full border border-gray-200">
-              <img
-                src={clientimage}
-                alt={user?.fullName ?? "User"}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="hidden min-w-0 text-left sm:block">
-              <p className="truncate text-sm font-semibold text-gray-900">
-                {user?.fullName}
-              </p>
-              <p className="text-xs text-gray-500">{roleLabel}</p>
-            </div>
-          </div>
+          <ProfileMenu />
         </div>
       </div>
     </header>

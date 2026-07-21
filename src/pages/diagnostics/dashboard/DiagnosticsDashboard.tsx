@@ -1,14 +1,21 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import CustomCalendar from "@/pages/doctor/dashboard/components/calendar";
 import {
   getPatientsLogRowById,
   type DiagnosticsPatientsLogRow,
+  type PatientCategory,
 } from "../data/mockDiagnostics";
 import DiagnosticsDashboardSummary from "./components/DiagnosticsDashboardSummary";
 import DashboardPatientsLog from "./components/DashboardPatientsLog";
 import DashboardPatientCard from "./components/DashboardPatientCard";
 
 const DiagnosticsDashboard = () => {
+  const location = useLocation();
+  const patientCategoryFilter = location.state?.patientCategory as
+    | PatientCategory
+    | undefined;
+
   const [selectedPatient, setSelectedPatient] =
     useState<DiagnosticsPatientsLogRow | null>(() => getPatientsLogRowById(7));
 
@@ -19,6 +26,7 @@ const DiagnosticsDashboard = () => {
         <DashboardPatientsLog
           selectedId={selectedPatient?.id ?? null}
           onSelectRow={setSelectedPatient}
+          patientCategoryFilter={patientCategoryFilter}
         />
       </div>
 
